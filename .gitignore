@@ -19,6 +19,12 @@ logs/
 python/NSE.json
 python/*.json.gz
 
+# Backtest outputs (pickles, Excel, summaries — can be 100MB+)
+src/backtest/results/
+src/backtest/2025/results/
+src/backtest/2026/results/
+**/backtest/**/results/
+
 # Working copies / scratch
 new_changes/
 memory/
@@ -34,3 +40,4 @@ memory/
 # Misc
 bottomline.txt
 *.pickle
+*.pkl
