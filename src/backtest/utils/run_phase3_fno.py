@@ -1,6 +1,12 @@
 """
 Phase 3: F&O Options Trading Simulation
 ========================================
+
+.. deprecated::
+    This script is superseded by the unified pipeline. Use instead:
+        python -m src.backtest.cli --config full_2025.json --phase 3a
+    See src/backtest/cli.py for all options.
+
 Simulates actual option buying (CE for calls, PE for puts) with fixed
 capital per trade (default 1L).  Uses ATM strike premiums fetched via
 the TickerFlow API and tracks SL / target on the option premium.

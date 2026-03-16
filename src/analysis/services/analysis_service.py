@@ -26,8 +26,12 @@ from ..models.entities import (
     TrendAnalysisResult, CEPEPair, PredictionResult,
 )
 
-_USE_OI_WEIGHT = analysis_config.USE_OI_MAGNITUDE_WEIGHTING
-_OI_BLEND = analysis_config.OI_WEIGHT_BLEND
+
+# NOTE: Do NOT cache analysis_config values at module level.
+# Backtest scripts mutate the config singletons after import, so
+# reading them here would produce stale values.
+# Use analysis_config.USE_OI_MAGNITUDE_WEIGHTING / .OI_WEIGHT_BLEND
+# directly where needed.
 
 
 class AnalysisService:
@@ -188,7 +192,7 @@ class AnalysisService:
                 "putTrend": puts_bullish > puts_bearish,
             }
 
-            if _USE_OI_WEIGHT:
+            if analysis_config.USE_OI_MAGNITUDE_WEIGHTING:
                 oi_data = self._compute_oi_magnitude_weights(df)
                 result["options"]["calls"].update({
                     "bullish_oi_weight": oi_data["calls_bullish_weight"],
@@ -198,7 +202,7 @@ class AnalysisService:
                     "bullish_oi_weight": oi_data["puts_bullish_weight"],
                     "bearish_oi_weight": oi_data["puts_bearish_weight"],
                 })
-                if _OI_BLEND > 0:
+                if analysis_config.OI_WEIGHT_BLEND > 0:
                     for key, b_w, be_w in [
                         ("calls", oi_data["calls_bullish_weight"], oi_data["calls_bearish_weight"]),
                         ("puts", oi_data["puts_bullish_weight"], oi_data["puts_bearish_weight"]),
@@ -210,7 +214,7 @@ class AnalysisService:
                             oi_pct = 0
                         count_pct = result["options"][key]["percentage"]
                         blended = math.ceil(
-                            count_pct * (1 - _OI_BLEND) + oi_pct * _OI_BLEND
+                            count_pct * (1 - analysis_config.OI_WEIGHT_BLEND) + oi_pct * analysis_config.OI_WEIGHT_BLEND
                         )
                         result["options"][key]["percentage"] = blended
                         result["options"][key]["grade"] = self.get_grade(blended)

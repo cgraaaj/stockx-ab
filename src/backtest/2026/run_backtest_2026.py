@@ -1,6 +1,12 @@
 """
 Options Analysis Backtest Runner
 ================================
+
+.. deprecated::
+    This script is superseded by the unified pipeline. Use instead:
+        python -m src.backtest.cli --config q1_2026.json
+    See src/backtest/cli.py for all options.
+
 Points-based dry run: validates signal quality and win rate.
 
 Runs the full pipeline per-date:

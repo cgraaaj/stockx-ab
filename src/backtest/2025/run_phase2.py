@@ -1,6 +1,12 @@
 """
 Phase 2: Trade Execution Simulation
 ====================================
+
+.. deprecated::
+    This script is superseded by the unified pipeline. Use instead:
+        python -m src.backtest.cli --config full_2025.json --phase 2
+    See src/backtest/cli.py for all options.
+
 Reads predictions from Phase 1, fetches OHLC candles from Upstox,
 applies VWAP bias check, then simulates trades with configurable
 R:R, SL method (VWAP / candle_low / etc.), and hard intraday exit.

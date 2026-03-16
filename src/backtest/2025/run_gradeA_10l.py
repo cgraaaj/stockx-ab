@@ -1,6 +1,12 @@
 """
 Grade A | 10% SL / 30% Target | 10L Capital (compounding)
 ==========================================================
+
+.. deprecated::
+    This script is superseded by the unified pipeline. Use instead:
+        python -m src.backtest.cli --config full_2025.json --phase 3b
+    See src/backtest/cli.py for all options.
+
 Runs the best-performing strategy with real capital tracking.
 Outputs a CSV trade log with full details.
 

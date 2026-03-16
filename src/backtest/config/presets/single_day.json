@@ -1,0 +1,7 @@
+{
+    "name": "single_day_test",
+    "description": "Single-date test run",
+    "trading_dates": ["2025-02-28"],
+    "signal_cutoff_time": "09:45:00",
+    "batch_size": 10
+}
